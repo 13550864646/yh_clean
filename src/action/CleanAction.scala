@@ -90,6 +90,7 @@ object CleanAction {
     }
 
 
+//    jddata.print()
     ssc.start()
     ssc.awaitTermination()
   }
