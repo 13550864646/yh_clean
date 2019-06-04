@@ -39,11 +39,10 @@ object CleanAction {
         val isp = dtsj.ISPNUM.isp
         val province = dtsj.ISPNUM.province
         (city,isp,province)
+    }.foreachRDD{
+      line=>
+        sql.createDataFrame(line).toDF().write.mode(SaveMode.Append).text("hdfs://ha/cusReport/resultdata/JA/dtsj")
     }
-//      .foreachRDD{
-//      line=>
-//        sql.createDataFrame(line).toDF().write.mode(SaveMode.Append).text("hdfs://ha/cusReport/resultdata/JA/dtsj")
-//    }
 //    探知数据处理
     tz_stream.map{
       line=>
@@ -91,7 +90,6 @@ object CleanAction {
     }
 
 
-//    jddata.print()
     ssc.start()
     ssc.awaitTermination()
   }
