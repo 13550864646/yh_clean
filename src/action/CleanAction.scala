@@ -8,8 +8,8 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.json4s.native.Serialization.read
 
-object CleanAction {
-
+object CleanAction
+  {
   def main(args: Array[String]): Unit = {
     val conf  = new SparkConf().setAppName("test").setMaster("local")
     val sc = new SparkContext(conf)
@@ -25,10 +25,10 @@ object CleanAction {
     /**
       *spark监听
       */
-    val dt_stream = ssc.textFileStream("hdfs://ha/cusReport/inputdata/JA/dtsj")
-    val tz_stream = ssc.textFileStream("hdfs://ha/cusReport/inputdata/TZ")
-    val jd_stream = ssc.textFileStream("hdfs://ha/cusReport/inputdata/BR/jdyx")
-    val ts_stream = ssc.textFileStream("hdfs://ha/cusReport/inputdata/BR/tsmd")
+    val dt_stream = ssc.textFileStream("hdfs://ha/yh_bigdata/cusReport/inputdata/JA/dtsj")
+    val tz_stream = ssc.textFileStream("hdfs://ha/yh_bigdata/cusReport/inputdata/TZ")
+    val jd_stream = ssc.textFileStream("hdfs://ha/yh_bigdata/cusReport/inputdata/BR/jdyx")
+    val ts_stream = ssc.textFileStream("hdfs://ha/yh_bigdata/cusReport/inputdata/BR/tsmd")
 
 //    集奥多头数据处理
     dt_stream.map{
@@ -41,7 +41,7 @@ object CleanAction {
         (city,isp,province)
     }.foreachRDD{
       line=>
-        sql.createDataFrame(line).toDF().write.mode(SaveMode.Append).text("hdfs://ha/cusReport/resultdata/JA/dtsj")
+        sql.createDataFrame(line).toDF().write.mode(SaveMode.Append).text("hdfs://ha/yh_bigdata/cusReport/resultdata/JA/dtsj")
     }
 //    探知数据处理
     tz_stream.map{
@@ -75,7 +75,7 @@ object CleanAction {
         (als_m12_cell_nbank_night_allnum,als_lst_cell_nbank_consnum,als_m12_id_nbank_cf_orgnum,als_m12_id_nbank_max_monnum,als_m12_cell_bank_tra_orgnum,als_lst_cell_nbank_inteday,rs_Rule_decision,rs_product_type,rs_scene,rs_product_name)
     }.foreachRDD {
       line =>
-        sql.createDataFrame(line).toDF().write.mode(SaveMode.Append).text("hdfs://ha/cusReport/resultdata/BR/jdyx")
+        sql.createDataFrame(line).toDF().write.mode(SaveMode.Append).text("hdfs://ha/yh_bigdata/cusReport/resultdata/BR/jdyx")
     }
     //    百融特殊名单
     val tsdata = ts_stream.map{

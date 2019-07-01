@@ -10,10 +10,10 @@
           <os-authentication value="false" />
           <database-type value="HDFS" />
           <database-version value="9999.0" />
-          <user value="thwx" />
+          <user value="yhwx" />
           <password value="" />
           <mapreduce-host value="172.18.55.28" />
-          <mapreduce-port value="50020" />
+          <mapreduce-port value="10020" />
           <hdfs-host value="172.18.55.28" />
           <hdfs-port value="8020" />
         </database>
