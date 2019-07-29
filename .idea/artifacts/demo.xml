@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="demo">
+    <output-path>$PROJECT_DIR$/out/artifacts/demo</output-path>
+    <root id="archive" name="demo.jar">
+      <element id="module-output" name="yh_clean" />
+      <element id="library" level="project" name="accessors-smart-1.2" />
+      <element id="library" level="application" name="scala-sdk-2.11.8" />
+    </root>
+  </artifact>
+</component>
